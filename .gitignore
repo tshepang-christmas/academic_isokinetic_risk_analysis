@@ -180,3 +180,21 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 *.db
+# Python environment exclusions
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Streamlit local browser state indicators
+.stcookies
+.streamlit/
+
+# STRICT AUDIT EXCLUSIONS: Block all sharded local research databases
+*.db
+database_*.db
+
+# Operating system cache files
+.DS_Store
+Thumbs.db
