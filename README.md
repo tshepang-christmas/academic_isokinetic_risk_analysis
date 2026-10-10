@@ -1,4 +1,4 @@
-# Isokinetic Profile Analysis Terminal (PHR 799)
+# Isokinetic Risk Factor Profiling Analysis (PHR 799)
 ### University of Botswana | Master of Education in Sports Science
 
 This repository contains the software implementation for my master's research project, automating the clinical risk-stratification metrics of the Croisier et al. (2008) framework. 
