@@ -6,7 +6,7 @@ from db_handler import ClinicalDatabaseHandler
 from datetime import datetime  
 from calculation_engine import evaluate_isokinetic_profile
 
-# --- CRUCIAL FIX: Streamlit configuration MUST execute first ---
+# --- Streamlit configuration execution first ---
 st.set_page_config(page_title="PHR 799", layout="wide")
 
 # --- 1. DYNAMIC CLIENT DATABASE SETUP ---
@@ -77,3 +77,33 @@ if submitted:
             st.warning("**Flagged Clinical Deficits:**")
             for deficit in analysis["deficits"]:
                 st.write(f"- {deficit}")
+
+# --- INTERACTIVE VISUAL ANALYTICS DASHBOARD ---
+st.markdown("---")
+st.subheader("📊 Interactive Performance Analytics")
+
+historical_df = db.load_records()
+
+if not historical_df.empty:
+    chart_df = historical_df.copy()
+    chart_df["Hamstring Asymmetry (%)"] = chart_df["ham_asym"].round(1)
+    chart_df["Dominant H:Q (%)"] = chart_df["dom_hq"].round(1)
+    chart_df["Non-Dominant H:Q (%)"] = chart_df["ndom_hq"].round(1)
+    
+    fig = px.scatter(
+        chart_df,
+        x="Dominant H:Q (%)",
+        y="Hamstring Asymmetry (%)",
+        color="profile_status",
+        color_discrete_map={"NORMAL PROFILE": "#2ecc71", "STRENGTH IMBALANCE PRESENT": "#e74c3c"},
+        hover_name="player_id",
+        hover_data={
+            "timestamp": True,
+            "Dominant H:Q (%)": ":.1f%",
+            "Non-Dominant H:Q (%)": ":.1f%",
+            "Hamstring Asymmetry (%)": ":.1f%"
+        },
+        title=f"Risk Profile Matrix for Workspace: '{client_name}'"
+    )
+    fig.add_hline(y=15.0, line_dash="dash", line_color="#7f8c8d")
+    st.plotly_chart(fig, use_container_width=True)
