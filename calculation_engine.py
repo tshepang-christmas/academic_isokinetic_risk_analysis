@@ -33,6 +33,7 @@ def evaluate_isokinetic_profile(dominant_leg: str, right_quad: float, right_ham:
     deficit_count = len(deficits)
     profile_status = "STRENGTH IMBALANCE PRESENT" if deficit_count >= 1 else "NORMAL PROFILE"
 
+    #4. Return the results as a dictionary - also prepped to be stored inside db handler.py
     return {
         "dom_hq": dom_hq,
         "ndom_hq": ndom_hq,
