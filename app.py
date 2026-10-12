@@ -69,7 +69,7 @@ if submitted:
         )
 
         col1, col2, col3 = st.columns(3)
-        col1.metric("Dominant H:Q Ratio", f"{analysis['dom_hq']:.1f}%", help="Target: ≥ 80%")
+        col1.metric("Dominant leg H:Q Ratio", f"{analysis['dom_hq']:.1f}%", help="Target: ≥ 80%")
         col2.metric("Non-Dominant H:Q Ratio", f"{analysis['ndom_hq']:.1f}%", help="Target: ≥ 80%")
         col3.metric("Bilateral Hamstring Asym.", f"{analysis['ham_asym']:.1f}%", help="Target: < 15%")
 
@@ -87,20 +87,20 @@ historical_df = db.load_records()
 if not historical_df.empty:
     chart_df = historical_df.copy()
     chart_df["Hamstring Asymmetry (%)"] = chart_df["ham_asym"].round(1)
-    chart_df["Dominant H:Q (%)"] = chart_df["dom_hq"].round(1)
-    chart_df["Non-Dominant H:Q (%)"] = chart_df["ndom_hq"].round(1)
+    chart_df["Dominant leg H:Q (%)"] = chart_df["dom_hq"].round(1)
+    chart_df["Non-Dominant leg H:Q (%)"] = chart_df["ndom_hq"].round(1)
     
     fig = px.scatter(
         chart_df,
-        x="Dominant H:Q (%)",
+        x="Dominant leg H:Q (%)",
         y="Hamstring Asymmetry (%)",
         color="profile_status",
         color_discrete_map={"NORMAL PROFILE": "#2ecc71", "STRENGTH IMBALANCE PRESENT": "#e74c3c"},
         hover_name="player_id",
         hover_data={
             "timestamp": True,
-            "Dominant H:Q (%)": ":.1f%",
-            "Non-Dominant H:Q (%)": ":.1f%",
+            "Dominant leg H:Q (%)": ":.1f%",
+            "Non-Dominant leg H:Q (%)": ":.1f%",
             "Hamstring Asymmetry (%)": ":.1f%"
         },
         title=f"Risk Profile Matrix for Workspace: '{client_name}'"
@@ -111,13 +111,13 @@ if not historical_df.empty:
 # --- HISTORICAL DATA LOGS ---
     st.markdown("### 📋 Historical Database Logs")
     st.dataframe(historical_df, use_container_width=True, hide_index=True)
-    
+
     # --- ADMINISTRATIVE CONTROL PANEL ---
     st.markdown("#### ⚙️ Database Record Maintenance")
     admin_col1, admin_col2 = st.columns(2)
     
     with admin_col1:
-        if st.button("🗑️ Rollback Latest Entry", key="btn_rollback", help="Permanently cuts out the single most recently logged database row."):
+        if st.button("🗑️ Rollback Latest Entry", key="btn_rollback", help="Permanently erases the most recently logged database row."):
             db.delete_last_entry()
             st.success("Latest record removed successfully.")
             st.rerun()
@@ -130,5 +130,5 @@ if not historical_df.empty:
             file_name=f"backup_{client_name}_{datetime.now().strftime('%Y%m%d')}.csv",
             mime="text/csv",
             key="btn_download_csv",
-            help="Generates an immediate localized flat file export backup payload."
+            help="Generates a localized csv file export backup."
         )
