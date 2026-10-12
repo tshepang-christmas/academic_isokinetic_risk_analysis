@@ -111,3 +111,24 @@ if not historical_df.empty:
 # --- HISTORICAL DATA LOGS ---
     st.markdown("### 📋 Historical Database Logs")
     st.dataframe(historical_df, use_container_width=True, hide_index=True)
+    
+    # --- ADMINISTRATIVE CONTROL PANEL ---
+    st.markdown("#### ⚙️ Database Record Maintenance")
+    admin_col1, admin_col2 = st.columns(2)
+    
+    with admin_col1:
+        if st.button("🗑️ Rollback Latest Entry", key="btn_rollback", help="Permanently cuts out the single most recently logged database row."):
+            db.delete_last_entry()
+            st.success("Latest record removed successfully.")
+            st.rerun()
+            
+    with admin_col2:
+        csv_backup = historical_df.to_csv(index=False).encode('utf-8')
+        st.download_button(
+            label="📥 Export Workspace to CSV",
+            data=csv_backup,
+            file_name=f"backup_{client_name}_{datetime.now().strftime('%Y%m%d')}.csv",
+            mime="text/csv",
+            key="btn_download_csv",
+            help="Generates an immediate localized flat file export backup payload."
+        )
