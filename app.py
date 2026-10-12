@@ -107,3 +107,7 @@ if not historical_df.empty:
     )
     fig.add_hline(y=15.0, line_dash="dash", line_color="#7f8c8d")
     st.plotly_chart(fig, use_container_width=True)
+
+# --- HISTORICAL DATA LOGS ---
+    st.markdown("### 📋 Historical Database Logs")
+    st.dataframe(historical_df, use_container_width=True, hide_index=True)
