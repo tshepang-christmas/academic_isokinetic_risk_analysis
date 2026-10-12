@@ -24,9 +24,9 @@ def evaluate_isokinetic_profile(dominant_leg: str, right_quad: float, right_ham:
     # 3. Track Deficits based on Croisier thresholds (<80% and >=15%)
     deficits = []
     if dom_hq < 80.0:
-        deficits.append(f"Dominant Functional H:Q ratio is low ({dom_hq:.1f}% < 80%)")
+        deficits.append(f"Dominant leg Functional H:Q ratio is low ({dom_hq:.1f}% < 80%)")
     if ndom_hq < 80.0:
-        deficits.append(f"Non-Dominant Functional H:Q ratio is low ({ndom_hq:.1f}% < 80%)")
+        deficits.append(f"Non-Dominant leg Functional H:Q ratio is low ({ndom_hq:.1f}% < 80%)")
     if ham_asym >= 15.0:
         deficits.append(f"Eccentric Hamstring Bilateral Asymmetry is high ({ham_asym:.1f}% ≥ 15%)")
 
