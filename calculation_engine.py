@@ -25,13 +25,13 @@ def evaluate_isokinetic_profile(dominant_leg: str, right_quad: float, right_ham:
     deficits = []
     
     if dom_hq < 80.0:
-        deficits.append(f"Dominant Functional H:Q ratio is low ({dom_hq:.1f}% < 80%)")
+        deficits.append(f"Dominant Functional H:Q ratio is low ({dom_hq:.0f}% < 80%)")
         
     if ndom_hq < 80.0:
-        deficits.append(f"Non-Dominant Functional H:Q ratio is low ({ndom_hq:.1f}% < 80%)")
+        deficits.append(f"Non-Dominant Functional H:Q ratio is low ({ndom_hq:.0f}% < 80%)")
         
     if ham_asym >= 15.0:
-        deficits.append(f"Eccentric Hamstring Bilateral Asymmetry is high ({ham_asym:.1f}% ≥ 15%)")
+        deficits.append(f"Eccentric Hamstring Bilateral Asymmetry is high ({ham_asym:.0f}% ≥ 15%)")
 
     # Count total independent deficits (ranges from 0 to 3)
     deficit_count = len(deficits)

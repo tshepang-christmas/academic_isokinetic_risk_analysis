@@ -43,13 +43,17 @@ class ClinicalDatabaseHandler:
         cursor = conn.cursor()
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         
+        ROUNDED_dom_hq = float(f"{analysis['dom_hq']:.0f}")
+        ROUNDED_ndom_hq = float(f"{analysis['ndom_hq']:.0f}")
+        ROUNDED_ham_asym = float(f"{analysis['ham_asym']:.0f}")
+
         cursor.execute("""
             INSERT INTO assessment_results (
                 timestamp, player_id, dominant_leg, right_quad, right_ham, 
                 left_quad, left_ham, dom_hq, ndom_hq, ham_asym, deficit_count, profile_status
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (timestamp, player_id, dominant_leg, r_quad, r_ham, l_quad, l_ham, 
-              analysis["dom_hq"], analysis["ndom_hq"], analysis["ham_asym"], 
+              ROUNDED_dom_hq, ROUNDED_ndom_hq, ROUNDED_ham_asym, 
               analysis["deficit_count"], analysis["profile_status"]))
         
         conn.commit()

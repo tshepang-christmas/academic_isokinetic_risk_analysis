@@ -74,7 +74,7 @@ if submitted:
         col3.metric("Bilateral Hamstring Asym.", f"{analysis['ham_asym']:.0f}%", help="Target: < 15%")
 
         if analysis["deficit_count"] > 0:
-            st.warning("**Flagged Clinical Deficits:**")
+            st.warning("**Flagged risk factor deficits:**")
             for deficit in analysis["deficits"]:
                 st.write(f"- {deficit}")
 
@@ -108,7 +108,7 @@ if not historical_df.empty:
     fig.add_vline(x=80.0, line_dash="dash", line_color="#7f8c8d", annotation_text="H:Q Threshold (80%)", annotation_position="top left")
     fig.add_hline(y=15.0, line_dash="dash", line_color="#7f8c8d", annotation_text="Asymmetry Threshold (15%)", annotation_position="top right")
 
-     # 2. Deficit Area Shading Overlays (The Risk Engine)
+     # 2. Deficit Area Shading Overlays (The Risk engine)
     # SHADE 1: Hamstring Asymmetry at 15% and ABOVE (Horizontal Red Block across the top)
     fig.add_hrect(y0=15.0, y1=100.0, fillcolor="#e74c3c", opacity=0.08, layer="below", line_width=0)
     
@@ -124,7 +124,6 @@ if not historical_df.empty:
     )
 
     st.plotly_chart(fig, use_container_width=True)
-
 
 # --- HISTORICAL DATA LOGS ---
     st.markdown("### 📋 Historical Database Logs")
