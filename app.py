@@ -26,10 +26,10 @@ with st.form("player_test_form"):
     player_id = st.text_input("Player ID")
     dominant_leg = st.selectbox("Dominant Leg", options=["Right", "Left"])
     
-    right_quad = st.number_input("Right Quadriceps Peak Torque (Nm)", min_value=0.0)
-    right_ham = st.number_input("Right Hamstring Peak Torque (Nm)", min_value=0.0)
-    left_quad = st.number_input("Left Quadriceps Peak Torque (Nm)", min_value=0.0)
-    left_ham = st.number_input("Left Hamstring Peak Torque (Nm)", min_value=0.0)
+    right_quad = st.number_input("Right Quadriceps Peak Torque (Nm)", min_value=0)
+    right_ham = st.number_input("Right Hamstring Peak Torque (Nm)", min_value=0)
+    left_quad = st.number_input("Left Quadriceps Peak Torque (Nm)", min_value=0)
+    left_ham = st.number_input("Left Hamstring Peak Torque (Nm)", min_value=0)
     
     save_option = st.selectbox(
         "Post-Calculation Action", 
@@ -69,9 +69,9 @@ if submitted:
         )
 
         col1, col2, col3 = st.columns(3)
-        col1.metric("Dominant leg H:Q Ratio", f"{analysis['dom_hq']:.1f}%", help="Target: ≥ 80%")
-        col2.metric("Non-Dominant H:Q Ratio", f"{analysis['ndom_hq']:.1f}%", help="Target: ≥ 80%")
-        col3.metric("Bilateral Hamstring Asym.", f"{analysis['ham_asym']:.1f}%", help="Target: < 15%")
+        col1.metric("Dominant leg H:Q Ratio", f"{analysis['dom_hq']:.0f}%", help="Target: ≥ 80%")
+        col2.metric("Non-Dominant H:Q Ratio", f"{analysis['ndom_hq']:.0f}%", help="Target: ≥ 80%")
+        col3.metric("Bilateral Hamstring Asym.", f"{analysis['ham_asym']:.0f}%", help="Target: < 15%")
 
         if analysis["deficit_count"] > 0:
             st.warning("**Flagged Clinical Deficits:**")
@@ -86,9 +86,9 @@ historical_df = db.load_records()
 
 if not historical_df.empty:
     chart_df = historical_df.copy()
-    chart_df["Hamstring Asymmetry (%)"] = chart_df["ham_asym"].round(1)
-    chart_df["Dominant leg H:Q (%)"] = chart_df["dom_hq"].round(1)
-    chart_df["Non-Dominant leg H:Q (%)"] = chart_df["ndom_hq"].round(1)
+    chart_df["Hamstring Asymmetry (%)"] = chart_df["ham_asym"].round(0)
+    chart_df["Dominant leg H:Q (%)"] = chart_df["dom_hq"].round(0)
+    chart_df["Non-Dominant leg H:Q (%)"] = chart_df["ndom_hq"].round(0)
     
     fig = px.scatter(
         chart_df,
@@ -114,7 +114,7 @@ if not historical_df.empty:
 
     # --- ADMINISTRATIVE CONTROL PANEL ---
     st.markdown("#### ⚙️ Database Record Maintenance")
-    admin_col1, admin_col2 = st.columns(2)
+    admin_col1, admin_col2, admin_col3 = st.columns(3)
     
     with admin_col1:
         if st.button("🗑️ Rollback Latest Entry", key="btn_rollback", help="Permanently erases the most recently logged database row."):
@@ -132,3 +132,16 @@ if not historical_df.empty:
             key="btn_download_csv",
             help="Generates a localized csv file export backup."
         )
+    with admin_col3:
+        #Prevent crash if database is empty
+            if not historical_df.empty:
+                unique_players = sorted(historical_df["player_id"].unique())
+                selected_player = st.selectbox(
+                "Select player for Individual Report", 
+                options=unique_players,
+                key="sb_history_lookup"
+            )
+        
+
+        
+        
