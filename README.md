@@ -37,3 +37,10 @@ To ensure data protection compliance under Botswana's Data Protection Act and ma
 * **Institution:** University of Botswana
 * **Student ID:** 202005567
 * **Location:** Gaborone, Botswana
+
+## 🏛️ Academic Supervision & Credits
+
+* **Research & Architecture Supervisor:** **Dr. Kagiso Ndlovu** (Head of Research Information & Data Management, University of Botswana)
+
+### 🔬 Informatics Oversight Credit
+Special acknowledgment is extended to **Dr. Kagiso Ndlovu** for his invaluable mentorship, structural review, and architectural oversight during the development of this platform. His guidance was instrumental in transitioning this project from a basic calculations utility into a rigorous **Design Science Research (DSR)** instantiation. Specifically, his supervision directly guided. Infinite thanks Dr.
