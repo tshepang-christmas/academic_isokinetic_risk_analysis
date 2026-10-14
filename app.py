@@ -18,7 +18,7 @@ db = ClinicalDatabaseHandler(client_name)
 st.sidebar.info(f"Connected to: `{db.db_filename}`")
 
 # --- STREAMLIT UI LAYOUT ---
-st.image(r"C:\Users\user\Documents\GitHub\PHR_799\academic_isokinetic_risk_analysis\assets\a-i-r.png", use_container_width=True)
+st.image(r"C:\Users\user\Documents\GitHub\PHR_799\academic_isokinetic_risk_analysis\assets\ARK.png", use_container_width=True)
 st.subheader("Enter Test Results")
 st.caption("Protocol: HUMAC NORM @ 60°/s | Framework: Croisier et al. (2008) Binary Model")
 
