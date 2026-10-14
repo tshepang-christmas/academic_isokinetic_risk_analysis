@@ -133,15 +133,17 @@ if not historical_df.empty:
             help="Generates a localized csv file export backup."
         )
     with admin_col3:
-        #Prevent crash if database is empty
+        #Defensive check (Boundary value testing) to ensure the DataFrame is not empty before attempting to access unique player IDs
             if not historical_df.empty:
                 unique_players = sorted(historical_df["player_id"].unique())
                 selected_player = st.selectbox(
-                "Select player for Individual Report", 
+                "Select player for Individual Report", # MANDATORY LABEL: Always visible on screen
                 options=unique_players,
-                key="sb_history_lookup"
-            )
-        
-
-        
-        
+                key="sb_history_lookup",
+                help="Select a participant ID to audit their risk factor metrics" # HOVER INFO: Only pops up on mouse hover
+                )
+            if selected_player:
+                player_history = historical_df[historical_df["player_id"] == selected_player]
+                latest_evaluation_status = player_history.iloc[-1]
+                st.markdown(f"**Latest Profile Status for {selected_player}**"
+                )
