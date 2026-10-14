@@ -99,13 +99,14 @@ if not historical_df.empty:
         hover_name="player_id",
         hover_data={
             "timestamp": True,
-            "Dominant leg H:Q (%)": ":.1f%",
-            "Non-Dominant leg H:Q (%)": ":.1f%",
-            "Hamstring Asymmetry (%)": ":.1f%"
+            "Dominant leg H:Q (%)": ":.0f%",
+            "Non-Dominant leg H:Q (%)": ":.0f%",
+            "Hamstring Asymmetry (%)": ":.0f%"
         },
         title=f"Risk Profile Matrix for Workspace: '{client_name}'"
     )
-    fig.add_hline(y=15.0, line_dash="dash", line_color="#7f8c8d")
+    fig.add_vline(x=80.0, line_dash="dash", line_color="#7f8c8d", annotation_text="H:Q Threshold (80%)", annotation_position="top left")
+    fig.add_hline(y=15.0, line_dash="dash", line_color="#7f8c8d", annotation_text="Asymmetry Threshold (15%)", annotation_position="top right")
     st.plotly_chart(fig, use_container_width=True)
 
 # --- HISTORICAL DATA LOGS ---
