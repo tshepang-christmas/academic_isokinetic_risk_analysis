@@ -154,7 +154,7 @@ if not historical_df.empty:
             if not historical_df.empty:
                 unique_players = sorted(historical_df["player_id"].unique())
                 selected_player = st.selectbox(
-                "Select player for Individual Report", # MANDATORY LABEL: Always visible on screen
+                "Select player's individual report 🔍", # MANDATORY LABEL: Always visible on screen
                 options=unique_players,
                 key="sb_history_lookup",
                 help="Select a participant ID to audit their risk factor metrics" # HOVER INFO: Only pops up on mouse hover
@@ -166,6 +166,10 @@ if not historical_df.empty:
                 )
             if latest_evaluation_status["profile_status"] == "STRENGTH IMBALANCE PRESENT":
                 st.error(f"⚠️ {latest_evaluation_status['profile_status']}")
+                st.write(f"• Dominant H:Q Ratio: **{latest_evaluation_status['dom_hq']:.0f}%**")
+                st.write(f"• Non-Dominant H:Q Ratio: **{latest_evaluation_status['ndom_hq']:.0f}%**")
+                st.write(f"• Bilateral Hamstring Asymmetry: **{latest_evaluation_status['ham_asym']:.0f}%**")
+                st.caption(f"📅 Last Screened: {latest_evaluation_status['timestamp']}")
             else:
                 st.success(f"✅ {latest_evaluation_status['profile_status']}")
                 st.write(f"• Dominant H:Q Ratio: **{latest_evaluation_status['dom_hq']:.0f}%**")
