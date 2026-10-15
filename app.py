@@ -159,11 +159,12 @@ if not historical_df.empty:
                 key="sb_history_lookup",
                 help="Select a participant ID to audit their risk factor metrics" # HOVER INFO: Only pops up on mouse hover
                 )
+                
             if selected_player:
                 player_history = historical_df[historical_df["player_id"] == selected_player]
                 latest_evaluation_status = player_history.iloc[-1]
                 st.markdown(f"**Latest Profile Status for {selected_player}**")
-                st.caption("ℹ️Dominant and non-dominant H:Q ratios ≥ 80%; hamstring asymmetry < 15%."
+                st.caption("ℹ Dominant and non-dominant H:Q ratios ≥ 80%; hamstring asymmetry < 15%."
                 )
 
             if latest_evaluation_status["profile_status"] == "STRENGTH IMBALANCE PRESENT":
