@@ -162,17 +162,22 @@ if not historical_df.empty:
             if selected_player:
                 player_history = historical_df[historical_df["player_id"] == selected_player]
                 latest_evaluation_status = player_history.iloc[-1]
-                st.markdown(f"**Latest Profile Status for {selected_player}**"
+                st.markdown(f"**Latest Profile Status for {selected_player}**")
+                st.caption("ℹ️Dominant and non-dominant H:Q ratios ≥ 80%; hamstring asymmetry < 15%."
                 )
+
             if latest_evaluation_status["profile_status"] == "STRENGTH IMBALANCE PRESENT":
                 st.error(f"⚠️ {latest_evaluation_status['profile_status']}")
                 st.write(f"• Dominant H:Q Ratio: **{latest_evaluation_status['dom_hq']:.0f}%**")
                 st.write(f"• Non-Dominant H:Q Ratio: **{latest_evaluation_status['ndom_hq']:.0f}%**")
                 st.write(f"• Bilateral Hamstring Asymmetry: **{latest_evaluation_status['ham_asym']:.0f}%**")
-                st.caption(f"📅 Last Screened: {latest_evaluation_status['timestamp']}")
+                st.caption(f"📅 Last Screened: {latest_evaluation_status['timestamp']}"
+                )
+
             else:
                 st.success(f"✅ {latest_evaluation_status['profile_status']}")
                 st.write(f"• Dominant H:Q Ratio: **{latest_evaluation_status['dom_hq']:.0f}%**")
                 st.write(f"• Non-Dominant H:Q Ratio: **{latest_evaluation_status['ndom_hq']:.0f}%**")
                 st.write(f"• Bilateral Hamstring Asymmetry: **{latest_evaluation_status['ham_asym']:.0f}%**")
-                st.caption(f"📅 Last Screened: {latest_evaluation_status['timestamp']}")
+                st.caption(f"📅 Last Screened: {latest_evaluation_status['timestamp']}"
+                )
