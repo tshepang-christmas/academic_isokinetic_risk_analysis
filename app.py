@@ -164,3 +164,11 @@ if not historical_df.empty:
                 latest_evaluation_status = player_history.iloc[-1]
                 st.markdown(f"**Latest Profile Status for {selected_player}**"
                 )
+            if latest_evaluation_status["profile_status"] == "STRENGTH IMBALANCE PRESENT":
+                st.error(f"⚠️ {latest_evaluation_status['profile_status']}")
+            else:
+                st.success(f"✅ {latest_evaluation_status['profile_status']}")
+                st.write(f"• Dominant H:Q Ratio: **{latest_evaluation_status['dom_hq']:.0f}%**")
+                st.write(f"• Non-Dominant H:Q Ratio: **{latest_evaluation_status['ndom_hq']:.0f}%**")
+                st.write(f"• Bilateral Hamstring Asymmetry: **{latest_evaluation_status['ham_asym']:.0f}%**")
+                st.caption(f"📅 Last Screened: {latest_evaluation_status['timestamp']}")
