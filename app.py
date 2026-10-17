@@ -5,6 +5,7 @@ import plotly.express as px
 from db_handler import ClinicalDatabaseHandler
 from datetime import datetime  
 from calculation_engine import evaluate_isokinetic_profile
+from security_wrapper import generate_deterministic_player_id
 
 # --- Streamlit configuration execution first ---
 st.set_page_config(page_title="PHR 799", layout="wide")
@@ -44,22 +45,26 @@ if submitted:
     elif min(right_quad, right_ham, left_quad, left_ham) == 0:
         st.error("All peak torque metrics must be greater than 0 to evaluate deficits.")
     else:
-        # Call the standalone calculation engine function
+        # --- ACADEMIC DETERMINISTIC PSEUDONYMISATION INTERCEPT ---
+        # Transforms raw inputs into strict subject tokens ('sub-XXXXX') for privacy-preserving storage and analysis
+        secure_player_id = generate_deterministic_player_id(player_id, cohort_prefix="UB-SSD")
+
+        # Call the standalone calculation engine function using pure mechanical integers
         analysis = evaluate_isokinetic_profile(dominant_leg, right_quad, right_ham, left_quad, left_ham)
 
-        # Conditional database storage based on user choice
+        # Conditional database storage based on user choice using the secure pseudonymised key
         if save_option == "Save to Database & Update Dashboard":
             try:
-                db.save_record(player_id, dominant_leg, right_quad, right_ham, left_quad, left_ham, analysis)
+                db.save_record(secure_player_id, dominant_leg, right_quad, right_ham, left_quad, left_ham, analysis)
                 st.toast("✅ Record saved successfully to local database!")
             except Exception as e:
                 st.error(f"Failed to log data to database: {e}")
         else:
             st.toast("ℹ️ Temporary calculation run. Data not committed.")
 
-        # Display output results
+        # Display output results matching the masked academic string
         st.markdown("---")
-        st.subheader(f"Diagnostic Profile: {player_id}")
+        st.subheader(f"Diagnostic Profile: {secure_player_id}")
         
         status_color = "red" if analysis["profile_status"] == "STRENGTH IMBALANCE PRESENT" else "green"
         st.markdown(
