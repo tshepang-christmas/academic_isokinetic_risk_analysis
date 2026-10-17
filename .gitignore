@@ -198,3 +198,4 @@ database_*.db
 # Operating system cache files
 .DS_Store
 Thumbs.db
+security_wrapper.py
