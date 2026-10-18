@@ -128,9 +128,9 @@ Refer to synthetic_dataset to test for your use case.
  
 Christmas, T. (2026). *Athlete Isokinetic Risk* [Computer software]. University of Botswana. https://github.com/tshepang-christmas/academic_isokinetic_risk_analysis
  
-## Author and supervision
+## Author
  
-**Author:** Tshepang Christmas, MEd. Physical Education - Sport Science, University of Botswana
+Tshepang Christmas, MEd. Physical Education - Sport Science, University of Botswana
 ---
 
 ## 🏛️ Academic Supervision & Credits
