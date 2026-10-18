@@ -116,21 +116,21 @@ Refer to synthetic_dataset to test for your use case.
 - Player names are never stored. Each identifier is converted to a pseudonymous ID using a keyed hash, so IDs cannot be reversed without the key. Anyone holding the key and a list of names could regenerate them, so this is pseudonymisation and not anonymisation.
 - **Never commit** real participant data, database files (`*.db`), exported CSV records or any file containing a key. Make sure the ignore file covers these.
 - Any example data in this repository is synthetic.
-- 
+
 ## Limitations
  
 - Single-user prototype with no authentication, role-based access, audit logging or encryption inside the application.
 - Records are stored in a single table with one row per saved screening. Repeated screenings of one player accumulate, but the schema is not normalised.
 - CSV export is file-based data exchange, not standards-based interoperability.
 - Tested with synthetic data and test cases; not clinically validated.
-- 
+ 
 ## How to cite
  
 Christmas, T. (2026). *Athlete Isokinetic Risk* [Computer software]. University of Botswana. https://github.com/tshepang-christmas/academic_isokinetic_risk_analysis
  
 ## Author and supervision
  
-**Author:** Tshepang Christmas, MSc Sport Science, University of Botswana
+**Author:** Tshepang Christmas, MEd. Physical Education - Sport Science, University of Botswana
 ---
 
 ## 🏛️ Academic Supervision & Credits
