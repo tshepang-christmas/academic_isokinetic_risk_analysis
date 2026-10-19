@@ -40,7 +40,7 @@ Clone the repo onto your machine.
 | `security_wrapper.py` | Pseudonymisation of player identifiers (HMAC-SHA256), reads the secret key from an environment variable |
 | `assets/` | Images used by the interface |
 | `requirements.txt` | Pinned package versions |
-`tests/synthetic_dataset`
+| `tests` | `synthetic_dataset` |
 ---
 ### Indicators and thresholds
  
@@ -48,7 +48,7 @@ Clone the repo onto your machine.
 |---|---|---|
 | Functional H:Q ratio, dominant leg | eccentric hamstring / concentric quadriceps x 100 | below 80% |
 | Functional H:Q ratio, non-dominant leg | eccentric hamstring / concentric quadriceps x 100 | below 80% |
-| Eccentric hamstring asymmetry | (stronger leg - weaker leg) / stronger leg x 100 | 15% or more |
+| Eccentric hamstring asymmetry | (stronger ham - weaker ham) / stronger ham x 100 | 15% or more |
 ---
 **Classification rule:** "strength imbalance present at 1 or more deficits".
 ---
