@@ -19,7 +19,7 @@ db = ClinicalDatabaseHandler(client_name)
 st.sidebar.info(f"Connected to: `{db.db_filename}`")
 
 # --- STREAMLIT UI LAYOUT ---
-st.image(r"assets\ARK.png", use_container_width=True)
+st.image(r"assets/ARK.png", use_container_width=True)
 st.subheader("Enter Test Results")
 
 with st.form("player_test_form"):
